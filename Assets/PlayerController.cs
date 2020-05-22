@@ -32,11 +32,11 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKey(KeyCode.F))
             {
-            isAttacking = true;
+            anim.SetBool("isAttacking", true);
         }
         else
         {
-            isAttacking = false;
+            anim.SetBool("isAttacking", false);
         }
 
 
@@ -69,10 +69,11 @@ public class PlayerController : MonoBehaviour
             {
                 rb.velocity = Vector2.up * jumpForce;
                 jumpTimeCounter -= Time.deltaTime;
+                anim.SetBool("isJumping", true);
             }
             else
             {
-                isJumping = false;
+                anim.SetBool("isJumping", false);
             }
 
 
@@ -80,7 +81,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.W))
         {
-            isJumping = false;
+            anim.SetBool("isJumping" , false);
         }
 
         if (isGrounded == false && Input.GetKeyDown(KeyCode.W))
