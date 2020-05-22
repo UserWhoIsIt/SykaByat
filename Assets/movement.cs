@@ -36,7 +36,6 @@ public class movement : MonoBehaviour
     {
         Move();
         Jump();
-        BetterJump();
         CheckIfGrounded();
     }
 
@@ -58,19 +57,6 @@ public class movement : MonoBehaviour
             additionalJumps--;
         }
     }
-
-    void BetterJump()
-    {
-        if (rb.velocity.y < 0)
-        {
-            rb.velocity += Vector2.up * Physics2D.gravity * (fallMultiplier - 1) * Time.deltaTime;
-        }
-        else if (rb.velocity.y > 0 && !Input.GetKey(KeyCode.Space))
-        {
-            rb.velocity += Vector2.up * Physics2D.gravity * (lowJumpMultiplier - 1) * Time.deltaTime;
-        }
-    }
-
     void CheckIfGrounded()
     {
         Collider2D colliders = Physics2D.OverlapCircle(isGroundedChecker.position, checkGroundRadius, groundLayer);

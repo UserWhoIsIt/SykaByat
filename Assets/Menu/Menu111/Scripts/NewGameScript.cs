@@ -23,7 +23,7 @@ public class NewGameScript : MonoBehaviour
 
     public void TaskOnClick()
     {
-        SceneManager.LoadScene("scenename");
+        SceneManager.LoadScene("arena");
     }
 
 
