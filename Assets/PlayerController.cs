@@ -14,7 +14,8 @@ public class PlayerController : MonoBehaviour
     private bool isGrounded;
     private float jumpTimeCounter;
     private bool isJumping;
-    private bool doubleJump;
+    
+    private bool isAttacking;
     public LayerMask whatIsGround;
 
     private Animator anim;
@@ -28,6 +29,17 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+
+        if (Input.GetKey(KeyCode.F))
+            {
+            isAttacking = true;
+        }
+        else
+        {
+            isAttacking = false;
+        }
+
+
         isGrounded = Physics2D.OverlapCircle(groundPos, checkRadius, whatIsGround);
 
         if (isGrounded == true && Input.GetKeyDown(KeyCode.W))
@@ -40,7 +52,7 @@ public class PlayerController : MonoBehaviour
 
             if (isGrounded == true)
             {
-                doubleJump = false;
+                
                 anim.SetBool("isJumping", false);
             }
             else
@@ -71,10 +83,10 @@ public class PlayerController : MonoBehaviour
             isJumping = false;
         }
 
-        if (isGrounded == false && doubleJump == false && Input.GetKeyDown(KeyCode.W))
+        if (isGrounded == false && Input.GetKeyDown(KeyCode.W))
         {
             isJumping = true;
-            doubleJump = true;
+            
             isJumping = true;
             jumpTimeCounter = jumpTime;
             rb.velocity = Vector2.up * jumpForce;
