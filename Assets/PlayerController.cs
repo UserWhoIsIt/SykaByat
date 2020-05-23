@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     private bool isGrounded;
     private float jumpTimeCounter;
     private bool isJumping;
-    
+
     private bool isAttacking;
     public LayerMask whatIsGround;
 
@@ -31,12 +31,12 @@ public class PlayerController : MonoBehaviour
     {
 
         if (Input.GetKey(KeyCode.F))
-            {
-            isAttacking = true;
+        {
+            anim.SetBool("isAttacking", true);
         }
         else
         {
-            isAttacking = false;
+            anim.SetBool("isAttacking", false);
         }
 
 
@@ -52,7 +52,7 @@ public class PlayerController : MonoBehaviour
 
             if (isGrounded == true)
             {
-                
+
                 anim.SetBool("isJumping", false);
             }
             else
@@ -65,14 +65,15 @@ public class PlayerController : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.W) && isJumping == true)
         {
-            if (jumpTimeCounter >0)
+            if (jumpTimeCounter > 0)
             {
                 rb.velocity = Vector2.up * jumpForce;
                 jumpTimeCounter -= Time.deltaTime;
+                anim.SetBool("isJumping", true);
             }
             else
             {
-                isJumping = false;
+                anim.SetBool("isJumping", false);
             }
 
 
@@ -80,13 +81,13 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.W))
         {
-            isJumping = false;
+            anim.SetBool("isJumping", false);
         }
 
         if (isGrounded == false && Input.GetKeyDown(KeyCode.W))
         {
             isJumping = true;
-            
+
             isJumping = true;
             jumpTimeCounter = jumpTime;
             rb.velocity = Vector2.up * jumpForce;
@@ -95,7 +96,7 @@ public class PlayerController : MonoBehaviour
         float moveInput = Input.GetAxisRaw("Horizontal");
         rb.velocity = new Vector2(moveInput * speed, rb.velocity.y);
 
-        if (moveInput ==0)
+        if (moveInput == 0)
         {
             anim.SetBool("isRunning", false);
         }
@@ -118,11 +119,5 @@ public class PlayerController : MonoBehaviour
 
 
     }
-
-
-
-
-
-
-
 }
+
